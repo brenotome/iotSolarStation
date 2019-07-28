@@ -2,6 +2,7 @@ load('api_config.js');
 load('api_events.js');
 load('api_gpio.js');
 load('api_pwm.js');
+load('api_i2c.js');
 load('api_mqtt.js');
 load('api_timer.js');
 load('api_sys.js');
@@ -22,19 +23,23 @@ let NODEMCU_GPIO = {
   D5 : 14,  // Hardware PWM
   D6 : 12,  // Hardware PWM
   D7 : 13,
-  D8 : 15 , // Boot fails if pulled HIGH. Hardware PWM
+  D8 : 15,  // Boot fails if pulled HIGH. Hardware PWM
   
-  // I2C recommended pins
-  SCL : 5,
-  SDA : 4 ,
 };
 
-
-
+GYRO.setup(0); // 0 -> no sleep mode
 Timer.set(1000, Timer.REPEAT, function() {
+  
+  GYRO.update();
+  print( "accel: " , GYRO.Accel.x , " , ", GYRO.Accel.y , " , ", GYRO.Accel.z );
+  print( "temp: " , GYRO.Temp );
+  print( "gyro: " , GYRO.Gyro.x , " , ", GYRO.Gyro.y , " , ", GYRO.Gyro.z );
+
   if(MQTT.isConnected()){
     print('MQTT is connected');
   } else {
     print("MQTT isn't connected");
   }
 }, null);
+
+
