@@ -8,11 +8,16 @@ modules_version: ${mos.version}
 mongoose_os_version: ${mos.version}
 
 config_schema:
-  - ["mqtt.enable", true]
-  - ["mqtt.server", "servermqtt"]
+  # WIFI
   - ["wifi.sta.enable", true]
-  - ["wifi.sta.ssid", "ssid"]
-  - ["wifi.sta.pass", "senha"]  
+  - ["wifi.sta.ssid", "InojosaLustosaPires"]
+  - ["wifi.sta.pass", "senhadainternet"]
+  
+  # MQTT 
+  - ["mqtt.enable", true]
+  - ["mqtt.server", "broker.hivemq.com:1883"]
+
+  # I2C
   - ["i2c.enable", true]
 
 tags:
@@ -30,3 +35,5 @@ libs:
   - origin: https://github.com/mongoose-os-libs/mjs
   - origin: https://github.com/mongoose-os-libs/mqtt
   - origin: https://github.com/mongoose-os-libs/pwm
+  - origin: https://github.com/mongoose-os-libs/adc
+  - origin: https://github.com/mongoose-os-libs/i2c

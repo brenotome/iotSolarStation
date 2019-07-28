@@ -1,6 +1,7 @@
 load('api_config.js');
 load('api_events.js');
 load('api_gpio.js');
+load('api_adc.js');
 load('api_timer.js');
 load('api_sys.js');
 load('api_pwm.js');
@@ -28,6 +29,11 @@ let NODEMCU_GPIO = {
   SDA : 4 ,
 };
 
+let MULTIPLEX_ADDRES = {
+  LDR_1 : 0 ,
+  LDR_2 : 1 ,
+  CURRENT_SENSOR : 2 ,
+};
 
 // Exemplo simples de um blink a cada 1s com Led
 let LED_PIN = NODEMCU_GPIO.D2;
@@ -45,7 +51,14 @@ Timer.set( 1000 , true , function(){
 },null);
 
 
-
 // Usando o servo:
 SERVO.setup( NODEMCU_GPIO.D3 );
 SERVO.goToDeg( 140 );
+
+// Testando o ADC
+ADC.enable(0);
+Timer.set( 1000 , Timer.REPEAT , function(){
+  print("Valor do ADC(0): " , ADC.read(0) )
+},null) 
+
+
